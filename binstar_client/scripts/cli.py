@@ -45,7 +45,7 @@ def file_or_token(value):
 
 def _custom_excepthook(logger, show_traceback=False):
     def excepthook(exc_type, exc_value, exc_traceback):
-        if issubclass(exc_type, KeyboardInterrupt):
+        if issubclass(exc_type, KeyboardInterrupt) or issubclass(exc_type, errors.BinstarError):
             return
 
         if show_traceback:
