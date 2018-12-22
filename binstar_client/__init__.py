@@ -217,17 +217,17 @@ class Binstar(OrgMixin, ChannelsMixin, PackageMixin):
             else:
                 msg += '\n' + data['error'] if data.get('error', None) else ''
 
-            ErrCls = errors.BinstarError(msg)
+            ErrCls = errors.BinstarError
             if res.status_code == 401:
-                ErrCls = errors.Unauthorized(msg)
+                ErrCls = errors.Unauthorized
             elif res.status_code == 404:
-                ErrCls = errors.NotFound(msg)
+                ErrCls = errors.NotFound
             elif res.status_code == 409:
-                ErrCls = errors.Conflict(msg)
+                ErrCls = errors.Conflict
             elif res.status_code >= 500:
-                ErrCls = errors.ServerError(msg)
+                ErrCls = errors.ServerError
 
-            raise ErrCls
+            raise ErrCls(msg, res.status_code)
 
     def user(self, login=None):
         '''
