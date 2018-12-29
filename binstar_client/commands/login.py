@@ -41,7 +41,7 @@ def try_replace_token(authenticate, **kwargs):
         raise
 
 
-def interactive_get_token(args, fail_if_already_exists=True):
+def interactive_get_token(args, fail_if_already_exists=False):
     bs = get_server_api(args.token, args.site)
     config = get_config(site=args.site)
 
